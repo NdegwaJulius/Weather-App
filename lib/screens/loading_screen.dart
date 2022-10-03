@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -18,14 +19,34 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   void getLocation() async {
     //LocationPermission permission = await Geolocator()
-    Position position =  await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
-    print(position);
-
-}
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.low);
+      print(position);
+    }
+        catch(e){
+          print(e);
+        }
+  }
 
   @override
   Widget build(BuildContext context) {
-    print('biuld called');
-    return Scaffold();
+    String myMargin = 'abc';
+    double myMarginAsDouble;
+    try {
+      myMarginAsDouble = double.parse(myMargin);
+    }
+    catch (e) {
+      print(e);
+
+    }
+
+    return Scaffold(
+      body: Container(
+        margin: EdgeInsets.all(myMarginAsDouble = 50.0),
+        color: Colors.red,
+      ),
+    );
   }
+
 }
