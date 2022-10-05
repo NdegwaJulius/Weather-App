@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class LoadingScreen extends StatefulWidget {
 
@@ -34,7 +35,17 @@ class _LoadingScreenState extends State<LoadingScreen> {
     http.Response  response = await http.get(Uri.parse('https://api.openweathermap.org/data/2.5/weather?lat=-4.003&lon=39.70&appid=bc60b25202029239c778f7703abb735d'));
    if (response.statusCode ==200) {
      String data = response.body;
-     print(data);
+     var decodedData = jsonDecode(data);
+
+     double temp = decodedData['main']['temp'];
+     print(temp);
+
+     int condit = decodedData['weather'][0]['id'];
+     print(condit);
+
+     String city = decodedData['name'];
+     print(city);
+
    } else {
      print(response.statusCode);
    }
