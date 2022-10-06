@@ -10,9 +10,9 @@ class NetworkHelper {
   http.Response  response = await http.get(Uri.parse(url));
   if (response.statusCode ==200) {
   String data = response.body;
-  var decodedData = jsonDecode(data);
+  //var weatherData = jsonDecode(data);
 
-  return decodedData;
+  return jsonDecode(data);
 
 }
   else {

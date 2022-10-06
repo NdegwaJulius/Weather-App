@@ -1,14 +1,41 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:weather_app/utilities/constants.dart';
 
 
 class LocationScreen extends StatefulWidget {
-  const LocationScreen({Key? key}) : super(key: key);
+  const LocationScreen({super.key, this.locationWeather});
+  final locationWeather;
+  // LocationScreen({Key? key}) : super(key: key);
+
   @override
   State<LocationScreen> createState() => _LocationScreenState();
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  late int temperature;
+  late int condition;
+  late String city;
+
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    updateUI(widget.locationWeather);
+
+  }
+
+  void updateUI (dynamic weatherData) {
+    double temp = weatherData['main']['temp'];
+    temperature = temp.toInt();
+    condition = weatherData['weather'][0]['id'];
+    city = weatherData['name'];
+     print('name');
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,9 +76,9 @@ class _LocationScreenState extends State<LocationScreen> {
               Padding(
                 padding: const EdgeInsets.only(left: 15.0),
                 child: Row(
-                  children: const [
+                  children:  [
                     Text(
-                      '32°',
+                      '$temperature°C',
                       style: kTempTextStyle,
                     ),
                     Text(
@@ -77,9 +104,4 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 }
 
-// double temp = decodedData['main']['temp'];
-//
-// int condit = decodedData['weather'][0]['id'];
-//
-//
-// String city = decodedData['name'];
+

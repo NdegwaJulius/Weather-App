@@ -1,3 +1,7 @@
+import 'location.dart';
+import 'package:flutter/services.dart';
+const apiKey = 'bc60b25202029239c778f7703abb735d';
+const openWeatherMapURL = 'https://api.openweathermap.org/data/2.5/weather';
 class WeatherModel {
   String getWeatherIcon(int condition) {
     if (condition < 300) {
